@@ -1,0 +1,106 @@
+/* Basic Reset to remove default margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Style the HEADER */
+header {
+    background: #35424a;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+/* Style the NAV */
+nav {
+    background: #e4e4e4;
+    padding: 0.5rem 0;
+}
+
+nav ul {
+    list-style: none
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+}
+
+nav a:hover {
+    color: #35424a;
+    font-weight: bold;
+}
+
+/* Style the MAIN content area */
+main {
+    display: flex;
+    margin: 1rem;
+    gap: 2rem; /* This creates space between the article and aside */
+}
+
+/* Style the ARTICLE */
+article {
+    flex: 3; /* This makes the article take 3 parts of the available space */
+    background: white;
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+article header {
+    background: none;
+    color: #333;
+    text-align: left;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+article section {
+    margin-bottom: 2rem;
+}
+
+/* Style the ASIDE */
+aside {
+    flex: 1; /* This makes the aside take 1 part of the available space */
+    background: #ddd;
+    padding: 1rem;
+    border-radius: 5px;
+    align-self: flex-start; /* Keeps the sidebar aligned to the top */
+}
+
+/* Style the FOOTER */
+footer {
+    background: #35424a;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+footer ul {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+footer ul li {
+    display: inline;
+    margin: 0 0.5rem;
+}
+
+footer a {
+    color: #fff;
+}
