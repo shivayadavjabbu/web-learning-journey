@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Theme Switcher</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .theme-buttons {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .content {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        /* Default theme */
+        body.light {
+            background: white;
+            color: black;
+        }
+        body.dark {
+            background: #1a1a1a;
+            color: white;
+        }
+        body.blue {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        body.green {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body class="light">
+    <h1>Color Theme Switcher</h1>
+    <p>Click buttons to change the theme!</p>
+    
+    <div class="theme-buttons">
+        <button onclick="setTheme('light')" style="background: #f5f5f5;">Light Theme</button>
+        <button onclick="setTheme('dark')" style="background: #333; color: white;">Dark Theme</button>
+        <button onclick="setTheme('blue')" style="background: #2196F3; color: white;">Blue Theme</button>
+        <button onclick="setTheme('green')" style="background: #4CAF50; color: white;">Green Theme</button>
+    </div>
+    
+    <div class="content" id="content">
+        <h2>Welcome to Theme Switcher!</h2>
+        <p>This is some sample content. Notice how the colors change when you switch themes.</p>
+        <p>Open the console to see theme change messages.</p>
+    </div>
+
+    <script>
+        function setTheme(themeName) {
+            console.log("Changing theme to:", themeName);
+            
+            // Remove all theme classes and add the selected one
+            document.body.className = themeName;
+            
+            // Update content based on theme
+            let content = document.getElementById('content');
+            
+            if (themeName === 'dark') {
+                content.innerHTML = `
+                    <h2>🌙 Dark Mode Activated</h2>
+                    <p>Easy on the eyes for night browsing!</p>
+                    <p>Current theme: ${themeName}</p>
+                `;
+            } else if (themeName === 'blue') {
+                content.innerHTML = `
+                    <h2>🔵 Blue Theme Active</h2>
+                    <p>Calm and professional look!</p>
+                    <p>Current theme: ${themeName}</p>
+                `;
+            } else if (themeName === 'green') {
+                content.innerHTML = `
+                    <h2>🌿 Green Theme Active</h2>
+                    <p>Fresh and natural appearance!</p>
+                    <p>Current theme: ${themeName}</p>
+                `;
+            } else {
+                content.innerHTML = `
+                    <h2>☀️ Light Theme Active</h2>
+                    <p>Clean and bright interface!</p>
+                    <p>Current theme: ${themeName}</p>
+                `;
+            }
+            
+            console.log("✅ Theme changed to:", themeName);
+        }
+
+        // Show initial theme in console
+        console.log("🎨 Theme Switcher Ready!");
+        console.log("Available themes: light, dark, blue, green");
+    </script>
+</body>
+</html>
