@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day1-basics</title>
+</head>
+<body>
+    <h1>Welcome to Javascript Basics!</h1>
+    <p>Open the browser console to see the magic.</p>
+
+    <button onclick="showAlert()">click Me!</button>
+    <button onclick="addNumbers()">Add numbers</button>
+
+    <script>
+        console.log("hello from the console"); 
+        console.warn("this is a warning message");
+        console.error("this is an error message"); 
+        console.info("this is some info");
+
+        let username = "John";
+        const userAge = 25; 
+        var isLearning = true; 
+
+        console.log("user name: " + username);
+        console.log("user age:", userAge); 
+        console.log("Is Learning javasript?:", isLearning);
+
+        let number1 = 10; 
+        let number2 = 5; 
+        let sum = number1 + number2; 
+
+        console.log("Sum of", number1, "and", number2, "is:", sum);
+        console.log("Math operations:", number1 + number2, number1 - number2, number1 * number2, number1 / number2);
+
+        function showAlert() {
+            alert("Button clicked! Hello, " + username + "!");
+            console.log("Alert function was called."); 
+        }
+
+        function addNumbers(){
+            let result = number1 + number2;
+            console.log("The sum of " + number1 + " and " + number2 + " is: " + result);
+            console.log("Add numbers function was called.");
+        }
+
+
+        console.log("====page loaded successfully====");
+
+        
+    </script>
+</body>
+</html>
