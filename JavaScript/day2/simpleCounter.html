@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Counter</title>
+
+    <style>
+        body{
+            text-align: center ;
+            padding: 50px;
+        }
+
+        button{
+            padding: 10px 20px; 
+            margin: 10px;
+            font-size: 20px; 
+        }
+           
+        #count{
+            font-size: 40px;
+            font-weight: bold;
+            margin: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Simple Counter</h1>
+    <div id="count">0</div>
+
+    <button onclick="increase()">+ Increase</button>
+    <button onclick="decrease()">- Decrease</button>
+    <button onclick="reset()">Reset</button>
+
+    <Script>
+        let count = 0; 
+
+        function increase(){
+            count++;
+            document.getElementById("count").innerText = count;
+        }
+
+        function decrease(){
+            count--;
+            document.getElementById("count").innerText = count;
+        }
+
+        function reset(){
+            count = 0;
+            document.getElementById("count").innerText = count;
+        }
+
+        function updateDisplay(){
+            document.getElementById("count").innerText = count;
+        }
+
+    </Script>
+</body>
+</html>
