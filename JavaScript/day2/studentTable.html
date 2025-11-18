@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Marks - Step 1</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .input-section { background: #f0f0f0; padding: 15px; margin-bottom: 20px; }
+        input, button { padding: 8px; margin: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background: #4CAF50; color: white; }
+    </style>
+</head>
+<body>
+    <h1>📊 Student Marks Table</h1>
+    
+    <div class="input-section">
+        <h3>Add New Student</h3>
+        <input type="text" id="studentName" placeholder="Student Name">
+        <input type="number" id="studentMarks" placeholder="Marks (0-100)">
+        <button onclick="addStudent()">Add to Table</button>
+    </div>
+
+    <table id="studentsTable">
+        <thead>
+            <tr>
+                <th>Roll No.</th>
+                <th>Student Name</th>
+                <th>Marks</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <!-- Rows will be added here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        let studentCount = 0; // This will track how many students we have
+        
+        function addStudent() {
+            // Step 1: Get values from input fields
+            let name = document.getElementById('studentName').value;
+            let marks = document.getElementById('studentMarks').value;
+            
+            console.log("Adding student:", name, "with marks:", marks);
+            
+            // Step 2: Basic validation
+            if (name === "" || marks === "") {
+                alert("Please fill both name and marks!");
+                return;
+            }
+            
+            if (marks < 0 || marks > 100) {
+                alert("Marks should be between 0 and 100!");
+                return;
+            }
+            
+            // Step 3: Increase student count (this becomes roll number)
+            studentCount = studentCount + 1;
+            
+            // Step 4: Determine status based on marks
+            let status = "";
+            if (marks >= 80) {
+                status = "Excellent 🎉";
+            } else if (marks >= 60) {
+                status = "Good 👍";
+            } else if (marks >= 40) {
+                status = "Average ✅";
+            } else {
+                status = "Needs Improvement ❌";
+            }
+            
+            // Step 5: Create new table row
+            let tableBody = document.getElementById('tableBody');
+            
+            let newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${studentCount}</td>
+                <td>${name}</td>
+                <td>${marks}</td>
+                <td>${status}</td>
+            `;
+            
+            // Step 6: Add the new row to table
+            tableBody.appendChild(newRow);
+            
+            // Step 7: Clear input fields for next entry
+            document.getElementById('studentName').value = "";
+            document.getElementById('studentMarks').value = "";
+            
+            console.log("✅ Student added! Total students:", studentCount);
+            
+            // Step 8: Check if we reached 10 students
+            if (studentCount === 10) {
+                console.log("🎯 Reached 10 students! Table is full.");
+                alert("Table is now full with 10 students!");
+            }
+        }
+    </script>
+</body>
+</html>
