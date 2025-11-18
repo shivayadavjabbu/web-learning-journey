@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validation - Real-time Method</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .container { background: #f9f9f9; padding: 20px; border-radius: 10px; max-width: 400px; }
+        input, button { padding: 10px; margin: 5px; width: 100%; box-sizing: border-box; }
+        .error { color: red; font-size: 12px; height: 15px; }
+        .success { color: green; font-size: 12px; height: 15px; }
+        .valid { border: 2px solid green; }
+        .invalid { border: 2px solid red; }
+    </style>
+</head>
+<body>
+    <h1>⏱️ Real-time Validation</h1>
+    
+    <div class="container">
+        <h3>Add Student (Real-time Validation)</h3>
+        
+        <div>
+            <input type="text" id="studentName" placeholder="Student Name" 
+                   oninput="validateNameRealTime()">
+            <div id="nameError" class="error"></div>
+        </div>
+        
+        <div>
+            <input type="number" id="studentMarks" placeholder="Marks (0-100)"
+                   oninput="validateMarksRealTime()">
+            <div id="marksError" class="error"></div>
+        </div>
+        
+        <button id="submitBtn" onclick="submitForm()">Add Student</button>
+        <div id="formError" class="error"></div>
+    </div>
+
+    <script>
+        let isNameValid = false;
+        let isMarksValid = false;
+        
+        function validateNameRealTime() {
+            let name = document.getElementById('studentName').value.trim();
+            let errorElement = document.getElementById('nameError');
+            let inputElement = document.getElementById('studentName');
+            
+            console.log("Real-time name validation:", name);
+            
+            // Reset
+            errorElement.innerHTML = "";
+            inputElement.classList.remove('valid', 'invalid');
+            isNameValid = false;
+            
+            if (name === "") {
+                errorElement.innerHTML = "⚠️ Name cannot be empty";
+                inputElement.classList.add('invalid');
+                return;
+            }
+            
+            if (name.length < 2) {
+                errorElement.innerHTML = "❌ Name must be at least 2 characters";
+                inputElement.classList.add('invalid');
+                return;
+            }
+            
+            if (!/^[a-zA-Z\s]+$/.test(name)) {
+                errorElement.innerHTML = "❌ Only letters and spaces allowed";
+                inputElement.classList.add('invalid');
+                return;
+            }
+            
+            // If valid
+            errorElement.innerHTML = "✅ Valid name";
+            errorElement.className = "success";
+            inputElement.classList.add('valid');
+            isNameValid = true;
+            updateSubmitButton();
+        }
+        
+        function validateMarksRealTime() {
+            let marks = document.getElementById('studentMarks').value;
+            let errorElement = document.getElementById('marksError');
+            let inputElement = document.getElementById('studentMarks');
+            
+            console.log("Real-time marks validation:", marks);
+            
+            // Reset
+            errorElement.innerHTML = "";
+            inputElement.classList.remove('valid', 'invalid');
+            isMarksValid = false;
+            
+            if (marks === "") {
+                errorElement.innerHTML = "⚠️ Marks cannot be empty";
+                inputElement.classList.add('invalid');
+                return;
+            }
+            
+            marks = parseInt(marks);
+            
+            if (isNaN(marks)) {
+                errorElement.innerHTML = "❌ Must be a number";
+                inputElement.classList.add('invalid');
+                return;
+            }
+            
+            if (marks < 0 || marks > 100) {
+                errorElement.innerHTML = "❌ Must be between 0-100";
+                inputElement.classList.add('invalid');
+                return;
+            }
+            
+            // If valid
+            errorElement.innerHTML = "✅ Valid marks";
+            errorElement.className = "success";
+            inputElement.classList.add('valid');
+            isMarksValid = true;
+            updateSubmitButton();
+        }
+        
+        function updateSubmitButton() {
+            let button = document.getElementById('submitBtn');
+            if (isNameValid && isMarksValid) {
+                button.disabled = false;
+                button.innerHTML = "✅ Add Student";
+                button.style.background = "#4CAF50";
+            } else {
+                button.disabled = true;
+                button.innerHTML = "Add Student";
+                button.style.background = "#ccc";
+            }
+        }
+        
+        function submitForm() {
+            if (isNameValid && isMarksValid) {
+                alert("🎉 Student added successfully!");
+                // Reset form
+                document.getElementById('studentName').value = "";
+                document.getElementById('studentMarks').value = "";
+                document.getElementById('nameError').innerHTML = "";
+                document.getElementById('marksError').innerHTML = "";
+                document.getElementById('studentName').classList.remove('valid');
+                document.getElementById('studentMarks').classList.remove('valid');
+                isNameValid = false;
+                isMarksValid = false;
+                updateSubmitButton();
+            }
+        }
+        
+        // Initialize button state
+        updateSubmitButton();
+    </script>
+</body>
+</html>
