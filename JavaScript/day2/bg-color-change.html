@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Change</title>
+    <style>
+        body{
+            background: white;
+        }
+
+        button{
+            border-radius: 10px;
+            width: 100px; 
+        }
+
+    </style>
+</head>
+<body>
+    <h1>body color changing using Html and javascript</h1>
+
+    <button onclick="changeColorRed()">Chnage red</button>
+    <button onclick="changeColorGreen()">Change green</button>
+    <button onclick="changeColorBlue()">change blue</button>
+
+    <script>
+        let currentColor = "white"; 
+        
+        function changeColorRed(){
+            console.log("Change to red"); 
+            document.body.style.background = "red";
+            currentColor = "red";
+        }
+
+        function changeColorGreen(){
+            console.log("Change to green"); 
+            document.body.style.background = "green";
+            currentColor = "green";
+        }
+
+        function changeColorBlue(){
+            console.log("Change to blue"); 
+            document.body.style.background = "blue";
+            currentColor = "blue";
+        }
+
+    </script>
+</body>
+</html>
