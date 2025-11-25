@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Todo List</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+        .todo-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        #taskInput {
+            width: 70%;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .task-item {
+            background: #f8f9fa;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        .delete-btn {
+            background: #dc3545;
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h2>📝 My Todo List</h2>
+        
+        <div>
+            <input type="text" id="taskInput" placeholder="Enter a new task...">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        
+        <div id="taskList"></div>
+        
+        <div style="margin-top: 20px;">
+            <button onclick="clearCompleted()">Clear Completed</button>
+            <button onclick="clearAll()">Clear All</button>
+        </div>
+    </div>
+
+    <script>
+        let tasks = []; // Array to store all tasks
+
+        function addTask() {
+            let taskInput = document.getElementById('taskInput');
+            let taskText = taskInput.value.trim();
+            
+            if (taskText === "") {
+                console.warn("⚠️ Cannot add empty task!");
+                alert("Please enter a task!");
+                return;
+            }
+            
+            console.log("Adding new task:", taskText);
+            
+            // Add task to our array
+            tasks.push({
+                text: taskText,
+                completed: false,
+                id: Date.now() // Unique ID based on timestamp
+            });
+            
+            // Clear input
+            taskInput.value = "";
+            
+            // Update display
+            displayTasks();
+            
+            console.log("✅ Task added. Total tasks:", tasks.length);
+        }
+
+        function displayTasks() {
+            let taskList = document.getElementById('taskList');
+            taskList.innerHTML = ""; // Clear current list
+            
+            console.log("Displaying tasks:", tasks);
+            
+            if (tasks.length === 0) {
+                taskList.innerHTML = "<p>No tasks yet. Add a task above!</p>";
+                return;
+            }
+            
+            tasks.forEach(task => {
+                let taskElement = document.createElement('div');
+                taskElement.className = `task-item ${task.completed ? 'completed' : ''}`;
+                taskElement.innerHTML = `
+                    <span onclick="toggleTask(${task.id})" style="cursor: pointer;">
+                        ${task.completed ? '✅' : '⭕'} ${task.text}
+                    </span>
+                    <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+                `;
+                taskList.appendChild(taskElement);
+            });
+        }
+
+        function toggleTask(taskId) {
+            console.log("Toggling task:", taskId);
+            
+            // Find the task and toggle completed status
+            let task = tasks.find(t => t.id === taskId);
+            if (task) {
+                task.completed = !task.completed;
+                console.log(`Task "${task.text}" marked as ${task.completed ? 'completed' : 'incomplete'}`);
+                displayTasks();
+            }
+        }
+
+        function deleteTask(taskId) {
+            console.log("Deleting task:", taskId);
+            
+            // Remove task from array
+            tasks = tasks.filter(t => t.id !== taskId);
+            console.log("Task deleted. Remaining tasks:", tasks.length);
+            
+            displayTasks();
+        }
+
+        function clearCompleted() {
+            console.log("Clearing completed tasks...");
+            
+            let completedCount = tasks.filter(t => t.completed).length;
+            tasks = tasks.filter(t => !t.completed);
+            
+            console.log(`Removed ${completedCount} completed tasks`);
+            displayTasks();
+        }
+
+        function clearAll() {
+            console.log("Clearing ALL tasks...");
+            
+            if (tasks.length === 0) {
+                console.log("No tasks to clear");
+                return;
+            }
+            
+            if (confirm("Are you sure you want to delete ALL tasks?")) {
+                tasks = [];
+                console.log("All tasks cleared");
+                displayTasks();
+            }
+        }
+
+        // Initial display
+        console.log("✅ Todo List Ready!");
+        displayTasks();
+    </script>
+</body>
+</html>
