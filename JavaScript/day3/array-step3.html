@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arrays - Step 3</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .container { background: #f0fff0; padding: 20px; border-radius: 10px; }
+        .output { background: white; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        button { padding: 10px; margin: 5px; background: #4CAF50; color: white; border: none; }
+        .new-item { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>📋 Arrays - Step 3: Adding Elements</h1>
+    
+    <div class="container">
+        <h3>Methods to add elements to arrays:</h3>
+        
+        <button onclick="demoPush()">push() - Add to END</button>
+        <button onclick="demoUnshift()">unshift() - Add to START</button>
+        
+        <div class="output" id="output">
+            Current Array: ['Apple', 'Banana']
+        </div>
+    </div>
+
+    <script>
+        let fruits = ['Apple', 'Banana'];
+        
+        function updateOutput(message) {
+            document.getElementById('output').innerHTML = message;
+            console.log(message);
+        }
+
+        function demoPush() {
+            console.log("=== PUSH METHOD ===");
+            console.log("Before push:", fruits);
+            
+            // push() adds to the END of array
+            fruits.push('Orange');
+            console.log("After push('Orange'):", fruits);
+            
+            // push() returns the new length
+            let newLength = fruits.push('Grapes', 'Mango');
+            console.log("After push multiple:", fruits);
+            console.log("New length:", newLength);
+            
+            updateOutput(`
+                <strong>push() - Adds to END:</strong><br>
+                 fruits.push('Orange')<br>
+                fruits.push('Grapes', 'Mango')<br><br>
+                <strong>Result:</strong> [${fruits.join(', ')}]<br>
+                <strong>New Length:</strong> ${newLength}
+            `);
+        }
+
+        function demoUnshift() {
+            console.log("=== UNSHIFT METHOD ===");
+            console.log("Before unshift:", fruits);
+            
+            // unshift() adds to the START of array
+            fruits.unshift('Strawberry');
+            console.log("After unshift('Strawberry'):", fruits);
+            
+            // unshift() returns the new length
+            let newLength = fruits.unshift('Blueberry', 'Raspberry');
+            console.log("After unshift multiple:", fruits);
+            console.log("New length:", newLength);
+            
+            updateOutput(`
+                <strong>unshift() - Adds to START:</strong><br>
+                fruits.unshift('Strawberry')<br>
+                fruits.unshift('Blueberry', 'Raspberry')<br><br>
+                <strong>Result:</strong> [${fruits.join(', ')}]<br>
+                <strong>New Length:</strong> ${newLength}
+            `);
+        }
+    </script>
+</body>
+</html>
