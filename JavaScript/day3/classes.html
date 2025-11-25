@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Classes - Step 1</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .container { background: #e8f5e8; padding: 20px; border-radius: 10px; }
+        button { padding: 10px; margin: 5px; background: #4CAF50; color: white; border: none; }
+        .output { background: white; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🏛️ JavaScript Classes - Step 1</h1>
+    
+    <div class="container">
+        <h3>Basic Class Structure</h3>
+        
+        <button onclick="demoBasicClass()">Basic Class</button>
+        <button onclick="demoConstructor()">Constructor</button>
+        <button onclick="demoMethods()">Class Methods</button>
+        <button onclick="demoInheritance()">Inheritance</button>
+        
+        <div class="output" id="output">
+            Click buttons to see class examples...
+        </div>
+    </div>
+
+    <script>
+        function updateOutput(message) {
+            document.getElementById('output').innerHTML = message;
+            console.log(message);
+        }
+
+        // 1. BASIC CLASS
+        class Student {
+            // Constructor - runs when creating new instance
+            constructor(name, age, grade) {
+                this.name = name;
+                this.age = age;
+                this.grade = grade;
+            }
+            
+            // Method - function inside class
+            introduce() {
+                return `Hello, I'm ${this.name}, ${this.age} years old, Grade: ${this.grade}`;
+            }
+            
+            // Method that updates properties
+            updateGrade(newGrade) {
+                this.grade = newGrade;
+                return `Grade updated to: ${this.grade}`;
+            }
+        }
+
+        // 2. CLASS WITH STATIC METHOD
+        class MathHelper {
+            static add(a, b) {
+                return a + b;
+            }
+            
+            static multiply(a, b) {
+                return a * b;
+            }
+        }
+
+        // 3. INHERITANCE
+        class CollegeStudent extends Student {
+            constructor(name, age, grade, major) {
+                super(name, age, grade); // Call parent constructor
+                this.major = major;
+            }
+            
+            // Override parent method
+            introduce() {
+                return `${super.introduce()}, Major: ${this.major}`;
+            }
+            
+            // New method specific to CollegeStudent
+            study() {
+                return `${this.name} is studying ${this.major}`;
+            }
+        }
+
+        function demoBasicClass() {
+            console.log("=== BASIC CLASS ===");
+            
+            // Create instances (objects) from class
+            const student1 = new Student("Alice", 20, "A");
+            const student2 = new Student("Bob", 22, "B");
+            
+            console.log("Student 1:", student1);
+            console.log("Student 2:", student2);
+            
+            updateOutput(`
+                <strong>Class Instances:</strong><br>
+                Student 1: ${student1.introduce()}<br>
+                Student 2: ${student2.introduce()}
+            `);
+        }
+
+        function demoConstructor() {
+            console.log("=== CONSTRUCTOR ===");
+            
+            const student = new Student("Charlie", 21, "A+");
+            console.log("New student created:", student);
+            
+            updateOutput(`
+                <strong>Constructor in action:</strong><br>
+                Created: ${student.introduce()}
+            `);
+        }
+
+        function demoMethods() {
+            console.log("=== CLASS METHODS ===");
+            
+            const student = new Student("Diana", 19, "B+");
+            console.log("Before update:", student.introduce());
+            
+            student.updateGrade("A");
+            console.log("After update:", student.introduce());
+            
+            // Static method (called on class, not instance)
+            let sum = MathHelper.add(5, 3);
+            let product = MathHelper.multiply(4, 5);
+            
+            updateOutput(`
+                <strong>Methods:</strong><br>
+                Original: Diana, 19 years old, Grade: B+<br>
+                After update: ${student.introduce()}<br><br>
+                <strong>Static Methods:</strong><br>
+                MathHelper.add(5, 3) = ${sum}<br>
+                MathHelper.multiply(4, 5) = ${product}
+            `);
+        }
+
+        function demoInheritance() {
+            console.log("=== INHERITANCE ===");
+            
+            const collegeStudent = new CollegeStudent("Eve", 20, "A", "Computer Science");
+            console.log("College student:", collegeStudent);
+            
+            updateOutput(`
+                <strong>Inheritance Example:</strong><br>
+                ${collegeStudent.introduce()}<br>
+                ${collegeStudent.study()}
+            `);
+        }
+    </script>
+</body>
+</html>
