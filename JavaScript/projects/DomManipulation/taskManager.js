@@ -95,6 +95,24 @@ const taskManager = {
 
             taskList.appendChild(taskElement); 
         })
+    },
+
+    editTask : function(id) {
+        const task = this.tasks.find(task => task.id === id); 
+
+        if(!task) return; 
+
+        const newTitle = prompt('Edit task title :', task.title); 
+        const newDesc = prompt('Edit task description :', task.description); 
+        const newPriority = prompt('Edit priority (High/Medium/Low):', task.priority); 
+
+        if (newTitle !== null) {
+            this.updateTask(id, {
+                title : newTitle, 
+                description : newDesc, 
+                priority : newPriority
+            })
+        }
     }
 }; 
 
@@ -114,6 +132,21 @@ function addTaskFromInput() {
     titleInput.value = ''; 
     descInput.value = ''; 
     titleInput.focus(); 
+}
+
+function clearAllTasks() {
+    if (confirm('Are you sure you want to delete all tasks ?')) {
+        taskManager.tasks = []; 
+        taskManager.saveTasks(); 
+        taskManager.renderTasks();
+    }
+}
+
+//New: Add Keyboard shortcut
+document.getElementById('taskTitle').addEventListener('keypress', function(e)) {
+    if(e.key === 'Enter') {
+        addTaskFromInput(); 
+    }
 }
 
 //initialize the task manager when page reloads
