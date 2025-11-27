@@ -5,10 +5,37 @@ let isCompleted = false;
 let taskPriority = "High";
 let taskCategories = ["Study", "Programming", "Personal"];
 
-console.log("=== Task Manager ===");
-console.log("Title:", taskTitle);
-console.log("Description:", taskDescription);
-console.log("Due Date:", taskDueDate);
-console.log("Completed:", isCompleted);
-console.log("Priority:", taskPriority);
-console.log("Categories:", taskCategories);
+function createTask(title, description, priority){
+    return {
+        title: title, 
+        description: description, 
+        priority: priority,
+        isCompleted: false,
+        createdAt: new Date().toLocaleDateString()
+    };
+}
+
+function displayTask(task){
+    console.log(`${task.title}`); 
+    console.log(`${task.description}`);
+    console.log(`${task.priority}`);
+    console.log(`${task.isCompleted}`);
+    console.log(`${task.createdAt}`);
+    console.log("-----");
+}
+
+function completeTask(task){
+    task.isCompleted = true; 
+    return task; 
+}
+
+const task1 = createTask("Buy groceries", "Milk, Eggs, Bread", "Medium");
+const task2 = createTask("Finish homework", "Math assignment chapter 5", "High");
+
+displayTask(task1);
+displayTask(task2);
+
+// Mark first task as complete
+completeTask(task1);
+console.log("After completing task 1:");
+displayTask(task1);
