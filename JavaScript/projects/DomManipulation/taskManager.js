@@ -1,6 +1,27 @@
 const taskManager = {
     tasks : [], 
 
+    //intitialize the load tasks from local storage
+    init : function() {
+        this.loadTasks(); 
+        this.renderTasks(); 
+    }, 
+
+    //Load tasks from local storage
+    loadTasks : function() {
+        const savedTasks = localStorage.getItem('taskManagerTasks'); 
+        if (savedTasks) {
+            this.tasks = JSON.parse(savedTasks); 
+            console.log('Tasks loaded from localStorage:', this.tasks.length); 
+        }
+    }, 
+
+    // save tasks to localStorage
+    saveTasks : function() {
+        localStorage.setItem('taskManagerTasks', JSON.stringify(this.tasks)); 
+        console.log('Task saved to localStorage'); 
+    }, 
+
     addTask: function(title, description, priority = "Medium") {
         const newTask = {
             id: Date.now(),
@@ -11,15 +32,16 @@ const taskManager = {
             createdAt: new Date().toLocaleDateString()
         };
         this.tasks.push(newTask);
+        this.savedTasks(); 
         this.renderTasks(); 
         return newTask;
     },
 
     completeTask : function(id) {
         const task = this.tasks.find(task => task.id === id); 
-
         if (task) {
             task.isCompleted = !task.isCompleted; // Toggle completion
+            this.savedTasks(); 
             this.renderTasks(); 
             return; 
         }
@@ -27,9 +49,21 @@ const taskManager = {
 
     deleteTask : function(id) {
         this.tasks = this.tasks.filter(task => task.id !== id);
+        this.savedTasks(); 
         this.renderTasks(); 
         return; 
     },
+
+    updateTask : function(id, updates) {
+        const taskIndex = this.tasks.findIndex(task => task.id === id); 
+        if(taskIndex !== -1){
+            this.tasks[taskIndex] = {
+                ...this.tasks[taskIndex],  ...updates
+            }; 
+            this.savedTasks(); 
+            this.renderTasks(); 
+        }
+    }, 
 
     renderTasks : function() {
         const taskList = document.getElementById('taskList'); 
@@ -82,7 +116,7 @@ function addTaskFromInput() {
     titleInput.focus(); 
 }
 
-
+//initialize the task manager when page reloads
 document.addEventListener('DOMContentLoaded', function() {
-    taskManager.renderTasks();
+    taskManager.init(); 
 });
