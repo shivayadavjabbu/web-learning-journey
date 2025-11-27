@@ -24,6 +24,12 @@ function displayTask(task){
     console.log("-----");
 }
 
+function updatePriority(task, priority){
+    task.priority = priority; 
+    console.log(`The ${task.title} priority is update to ${task.priority}`); 
+    return task;
+}
+
 function completeTask(task){
     task.isCompleted = true; 
     return task; 
