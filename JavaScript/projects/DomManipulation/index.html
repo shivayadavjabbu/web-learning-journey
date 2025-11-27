@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript task manager</title>
+
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin:
+        auto; padding: 20px; }
+        .task { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .completed { opacity: 0.6; text-decoration: line-through; }
+        .high { border-left: 4px solid red; }
+        .medium { border-left: 4px solid orange; }
+        .low { border-left: 4px solid green; }
+        button { margin: 5px; padding: 5px 10px; cursor: pointer; }
+    </style>
+
+</head>
+<body>
+    <h1>JavaScript Task Manager</h1>
+
+    <div>
+        <input type="text" id="taskTitle" placeholder="Task Title" required>
+        <input type="text" id="taskDescription" placeholder="Description">
+
+        <select id="taskPriority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+
+        <button onclick="addTaskFromInput()">Add Task</button>
+    </div>=
+
+    <div id="taskList">
+        <h2>Your Tasks</h2>
+        <!-- tasks will appear here dynamically -->
+
+    </div>
+
+    <script src="taskManager.js"></script>
+    <!-- <script src="app.js"></script> -->
+</body>
+</html>
